@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: flash-account
+          uri: http://flash-account:7700
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
+        - id: flash-security
+          uri: http://flash-security:7710
+          predicates:
+            - Path=/security/**
+          filters:
+            - StripPrefix=1
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+server:
+  port: 80

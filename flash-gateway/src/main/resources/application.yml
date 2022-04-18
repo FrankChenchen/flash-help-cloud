@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    # 开发环境使用当前这个application + application-dev.yml
+    active: dev
