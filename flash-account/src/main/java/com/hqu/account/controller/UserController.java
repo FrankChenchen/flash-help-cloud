@@ -4,6 +4,7 @@ package com.hqu.account.controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.hqu.account.service.impl.UserServiceImpl;
 import com.hqu.infrastructure.domain.account.entity.User;
+import com.hqu.infrastructure.exception.BusinessException;
 import com.hqu.infrastructure.pojo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -26,14 +27,14 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
 
-    @PostMapping("test")
+    @PostMapping("register")
     // 接受用户提交的表单
     // 加上 @Validated 代表要对User进行校验
-    public R<String> test(@RequestBody @Validated User user) {
+    public R<String> register(@RequestBody @Validated User user) throws BusinessException {
 
-        userService.save(user);
+        userService.register(user);
         // 插入到数据库, 不需要管返回值，插入失败会报错，能执行到这边说明已经插入成功。
-        return R.ok("测试添加用户成功");
+        return R.ok("注册成功");
     }
 
     // path variable写法
