@@ -2,11 +2,13 @@ package com.hqu.infrastructure.domain.account.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -29,11 +31,13 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @Size(min = 2, max = 16, message = "用户名长度介于2 - 16")
     private String username;
 
     /**
      * 密码
      */
+    @Size(min = 6, max = 16, message = "密码长度介于6 - 16")
     private String password;
 
     /**

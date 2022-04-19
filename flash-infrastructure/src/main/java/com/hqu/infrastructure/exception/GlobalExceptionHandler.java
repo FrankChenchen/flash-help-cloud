@@ -18,9 +18,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public R<String> validateExceptionHandler(MethodArgumentNotValidException e) {
         e.printStackTrace();
+        // 获取到message内容，将提示消息返回给前端
         String message = e.getAllErrors().get(0).getDefaultMessage();
         return R.fail(HttpStatus.BAD_REQUEST, message);
-
     }
 
     // 未登录异常
