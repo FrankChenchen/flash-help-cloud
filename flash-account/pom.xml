@@ -29,7 +29,7 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <exclusions>
                 <exclusion>
-                    <!--                    去除mybatis依赖-->
+                    <!-- 去除mybatis依赖, 防止和mybatis-plus的mybatis版本冲突 -->
                     <groupId>org.mybatis</groupId>
                     <artifactId>mybatis</artifactId>
                 </exclusion>
