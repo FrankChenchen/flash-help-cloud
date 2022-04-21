@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         // 不要认证 /error 或者 具有AuthIgnore注解的方法
         if (!request.getRequestURI().equals("/error") && !handlerMethod.hasMethodAnnotation(AuthIgnore.class)) {
