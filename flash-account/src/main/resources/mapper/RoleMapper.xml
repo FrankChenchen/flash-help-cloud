@@ -4,11 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hqu.infrastructure.domain.account.entity.Role">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="update_time" property="updateTime" />
-        <result column="create_time" property="createTime" />
-        <result column="deleted" property="deleted" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
+    <select id="listUserRoles" resultMap="BaseResultMap">
+        select sr.*
+        from sys_role sr
+                 left join sys_user_role sur on sr.id = sur.role_id
+        where sur.user_id = #{userId}
+    </select>
 
 </mapper>

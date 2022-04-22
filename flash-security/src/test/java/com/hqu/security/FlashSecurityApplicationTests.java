@@ -6,7 +6,11 @@ import com.hqu.infrastructure.exception.BusinessException;
 import com.hqu.infrastructure.pojo.R;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
+import org.springframework.data.redis.core.RedisTemplate;
 
 @SpringBootTest
 class FlashSecurityApplicationTests {
@@ -20,4 +24,18 @@ class FlashSecurityApplicationTests {
         System.out.println(user.getPassword());
     }
 
+    @Autowired
+    RedisProperties lettuceClientConfiguration;
+    @Autowired
+    RedisConnectionFactory connectionFactory;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
+
+    @Test
+    void redisTest() {
+        System.out.println(lettuceClientConfiguration);
+        System.out.println(connectionFactory);
+
+        redisTemplate.opsForValue().set("1",lettuceClientConfiguration);
+    }
 }

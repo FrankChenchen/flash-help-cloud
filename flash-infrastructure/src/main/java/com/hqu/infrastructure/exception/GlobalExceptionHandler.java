@@ -1,6 +1,7 @@
 package com.hqu.infrastructure.exception;
 
 import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotRoleException;
 import com.hqu.infrastructure.constants.HttpStatus;
 import com.hqu.infrastructure.pojo.R;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,7 +27,13 @@ public class GlobalExceptionHandler {
     // 未登录异常
     @ExceptionHandler(NotLoginException.class)
     public R<String> notLoginExceptionHandler(NotLoginException e) {
-        return R.fail(HttpStatus.UNAUTHORIZED, "请登录");
+        return R.fail(HttpStatus.FORBIDDEN, "请登录");
+    }
+
+    // 权限不足异常
+    @ExceptionHandler(NotRoleException.class)
+    public R<String> notRoleExceptionHandler(NotRoleException e) {
+        return R.fail(HttpStatus.UNAUTHORIZED, e.getMessage());
     }
 
     // 拦截本系统的业务异常

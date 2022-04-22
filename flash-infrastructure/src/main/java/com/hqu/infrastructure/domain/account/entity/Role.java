@@ -2,11 +2,15 @@ package com.hqu.infrastructure.domain.account.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -25,7 +29,7 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
+    @NotBlank(message = "角色名称不能为空")
     private String name;
 
     private LocalDateTime updateTime;
