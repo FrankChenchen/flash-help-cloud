@@ -28,7 +28,7 @@ public class MybatisGen {
                 })
                 .strategyConfig(builder -> {
                     // 要生成的表
-                    builder.addInclude("sys_user", "sys_role", "sys_user_role").addTablePrefix("sys_");
+                    builder.addInclude("sys_user_wechat").addTablePrefix("sys_");
                     // 生成的controller文件配置
                     builder.controllerBuilder().enableRestStyle().enableHyphenStyle();
                     // 生成的entity文件配置

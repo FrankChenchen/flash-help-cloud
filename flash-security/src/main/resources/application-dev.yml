@@ -22,3 +22,23 @@ spring:
         min-idle: 0
 server:
   port: 7710
+
+wechat:
+  # 小程序appid
+  app-id: "wx12756a2557e97544"
+  # 小程序密钥
+  app-secret: "你的小程序密钥"
+  # 微信支付v3版密钥
+  api-key3: "32位密钥"
+  # 微信证书
+  platform-cert-path: "wx_cert.pem"
+  # 商家支付证书密钥
+  key-path: "apiclient_key.pem"
+  # 商家支付证书
+  cert-path: "apiclient_cert.pem"
+  # 商家支付证书 pkcs12格式
+  cert-p12-path: "apiclient_cert.p12"
+  # 商户id
+  mch-id: "1619401626"
+  # 支付回调地址
+  notify-url: "https://www.jarcheng.top/testapi/order/notify"

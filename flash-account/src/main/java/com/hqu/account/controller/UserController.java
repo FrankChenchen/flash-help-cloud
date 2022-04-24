@@ -4,6 +4,7 @@ package com.hqu.account.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.hqu.account.service.impl.UserServiceImpl;
+import com.hqu.infrastructure.constants.HttpStatus;
 import com.hqu.infrastructure.domain.account.entity.User;
 import com.hqu.infrastructure.exception.BusinessException;
 import com.hqu.infrastructure.pojo.R;
@@ -42,7 +43,7 @@ public class UserController {
 
     // path variable写法
     @AuthIgnore
-    @GetMapping("{username}")
+    @GetMapping("/find-by-username/{username}")
     public R<User> findByUsername(@PathVariable String username) {
         // getOne 传入查询条件
         User one = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getUsername, username));
@@ -50,7 +51,7 @@ public class UserController {
     }
 
     // 不需要接受任何参数
-    @GetMapping("userInfo")
+    @GetMapping("user-info")
     public R<User> user() {
         // 能进来说明已经通过了拦截器的认证
         // 在拦截器(LoginInterceptor)那边有一个checkLogin，已经将用户id记录到threadLocal
@@ -58,6 +59,19 @@ public class UserController {
         long id = StpUtil.getLoginIdAsLong();
         User user = userService.getById(id);
         return R.ok(user);
+    }
+
+    // 用户信息修改
+    @PostMapping("update")
+    public R<Boolean> updateUserInfo(@RequestBody User user) throws BusinessException {
+        // 当前访问的用户id和想要修改的用户id，相等才可以修改
+        if (StpUtil.getLoginIdAsLong() == user.getId()) {
+            // 这些字段不可修改
+            user.setPassword(null).setDeleted(null).setServiceName(null).setCreateTime(null);
+            userService.updateById(user);
+            return R.ok(true);
+        }
+        throw new BusinessException(HttpStatus.UNAUTHORIZED, "非本人操作");
     }
 }
 

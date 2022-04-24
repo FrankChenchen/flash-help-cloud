@@ -60,6 +60,16 @@ public class User implements Serializable {
      */
     private String nickname;
 
+    /**
+     * 头像
+     */
+    private String avatar;
+
+    /**
+     * 用户来自哪个服务
+     */
+    private String serviceName;
+
     private LocalDateTime updateTime;
 
     private LocalDateTime createTime;

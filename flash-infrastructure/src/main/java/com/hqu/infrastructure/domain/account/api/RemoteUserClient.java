@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(value = "flash-account", contextId = "user", url = "http://flash-account:7700", fallback = RemoteUserClientFallback.class)
 @Primary
 public interface RemoteUserClient {
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/find-by-username/{username}")
     R<User> getByUsername(@PathVariable String username) throws BusinessException;
 }
